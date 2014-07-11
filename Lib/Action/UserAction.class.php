@@ -17,7 +17,7 @@ class UserAction extends Action {
 			echo "false";
 			return false;
 		}else{
-			echo "welcom ".$user['usrid'];
+			echo "true";
 			return true;
 		}
 	}
