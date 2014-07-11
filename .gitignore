@@ -49,6 +49,7 @@ Icon
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+*.bak
 
 # Folder config file
 Desktop.ini
