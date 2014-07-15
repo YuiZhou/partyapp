@@ -29,6 +29,21 @@ class UserAction extends Action {
 		$user = getUser($usrid);
 		$party = getParty($user);
 		
+		switch ($user['status']) {
+			case 0:
+				$user['level'] = "群众";
+				break;
+			case 1:
+				$user['level'] = "积极分子";
+				break;
+			case 2:
+				$user['level'] = "预备党员";
+				break;
+			case 3:
+				$user['level'] = "党员";
+				break;
+		}
+
 		$user['party'] = $party['partyname'];
 		
 		if($party['leader'] == $usrid){
@@ -36,7 +51,6 @@ class UserAction extends Action {
 		}else if($party['assistant'] == $usrid){
 			$user['level'] = '党支部副书记';
 		}
-		
 		//foreach($user as $e){
 		//	echo $e."<br/>";
 		//}
