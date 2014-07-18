@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PartyApp</string>
+    <string name="logout">logout</string>
+    <string name="login">login</string>
+    <string name="anonymous">anonymous</string>
+    <string name="quit">quit</string>
+    <string name="username">姓名: </string>
+    <string name="studentid">学号: </string>
+    <string name="party">所属党支部: </string>
+    <string name="level">级别: </string>
+    <string name="full_date">转正日期: </string>
+    <string name="intern_date">成为预备党员日期: </string>
+    <string name="interst_date">成为积极分子日期: </string>
+    <string name="next_submit_date">下次提交思想汇报时间: </string>
+    <string name="user_list">党支部名单</string>
+    <string name="add_user">添加新用户</string>
+    <string name="add_news">发布新闻</string>
+
+</resources>
