@@ -25,7 +25,7 @@ class IndexAction extends Action {
 			$sqlstr = $sqlstr." OR `toPartyid` = ".$user['partyid'];
 		}
 		
-		$newsArray = $model -> field('id,title,date') -> where($sqlstr) -> limit($start, $length) -> select() ;
+		$newsArray = $model -> field('id,title,date') -> where($sqlstr) -> limit($start, $length) -> order("id desc")-> select() ;
 		
 		//echo $model -> getlastSql().'<br/>';
 		//foreach($newsArray as $news){

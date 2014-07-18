@@ -22,6 +22,17 @@ class UserAction extends Action {
 		}
 	}
 	
+
+	/** 
+	 * return the next time the user should submit his paper.
+	 * 
+	 * status 1 should submit per 3 monthes
+	 * status 2 should submit per 6 monthes
+	 */
+	public function nextSubmit($usrid){
+		echo nextSubmit($usrid);
+	}
+
 	/**
 	 * get the user's information
 	 */
@@ -51,6 +62,8 @@ class UserAction extends Action {
 		}else if($party['assistant'] == $usrid){
 			$user['level'] = '党支部副书记';
 		}
+
+		$user['submit_date'] = nextSubmit($usrid);
 		//foreach($user as $e){
 		//	echo $e."<br/>";
 		//}
@@ -73,7 +86,7 @@ class UserAction extends Action {
 		$model = M("comment");
 		$cmtArr = $model -> field('`comment`.`userid`,`user`.`username`,`comment`.`content`')
 			-> join('INNER JOIN `user` ON `comment`.`userid` = `user`.`usrid`') 
-			-> limit($start, $length) -> select() ;
+			-> limit($start, $length) -> order("id desc") -> select() ;
 		
 		//echo $model -> getlastSql().'<br/>';
 		//foreach($cmtArr as $cmt){
@@ -97,6 +110,17 @@ class UserAction extends Action {
 			return true;
 		}catch(Exception $e){
 			return false;
+		}
+	}
+
+	/**
+	 * If the user is not a leader, return false.
+	 */
+	public function isLeader($usrid){
+		if(isLeader($usrid)){
+			echo "true";
+		}else{
+			echo "false";
 		}
 	}
 

@@ -46,5 +46,47 @@ class LeaderAction extends Action {
 		
 	}
 
+	/**
+	 * add new user
+	 */
+	public function addUser($usrid, $newUser, $name){
+		$user = getUser($usrid);
+		$partyid = $user['partyid'];
+
+		echo $partyid;
+
+		try{
+			$model = M("user");
+			$data['usrid'] = $newUser;
+			$data['partyid'] = $partyid;
+			$data['username'] = $name;
+			
+			$model -> data($data) -> add();
+			//echo $model -> getlastSql().'<br/>';
+			return true;
+		}catch(Exception $e){
+			return false;
+		}
+	}
+
+	/* modify the user's information */
+	public function updateUser($usrid, $key, $value){
+		$model = M("user");
+
+		$condition["usrid"] = $usrid;
+
+		$data[$key] = $value;
+
+		$result= $model -> where($condition) -> data($data) -> save();
+
+		if($result !== false){ 
+			echo 'true';
+		}else{
+			echo 'false';
+		}
+
+
+	}
+
 
 }
