@@ -34,6 +34,7 @@
         <activity android:name="com.fdparty.partyapp.UserList"></activity>
         <activity android:name="com.fdparty.partyapp.AddNews"></activity>
         <activity android:name="com.fdparty.partyapp.AddUser"></activity>
+        <activity android:name="com.fdparty.partyapp.ShowUserInfo"></activity>
     </application>
 
 </manifest>
