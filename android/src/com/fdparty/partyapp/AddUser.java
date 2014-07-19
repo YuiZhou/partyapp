@@ -48,8 +48,10 @@ public class AddUser extends Activity {
 			}else{
 				return false;
 			}
-		}catch(Exception e){}
-		return false;
+		}catch(Exception e){
+			return false;
+		}
+		
 		
 	}
 }

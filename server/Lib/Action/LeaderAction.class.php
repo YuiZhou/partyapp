@@ -27,6 +27,7 @@ class LeaderAction extends Action {
 		if($usrid == 0){
 			$toPartyid = 0;
 		}else if(!isLeader($usrid)){
+			echo "false";
 			return false;
 		}else{
 			$user = getUser($usrid);
@@ -39,8 +40,10 @@ class LeaderAction extends Action {
 			$data['title'] = $title;
 			$data['content'] = $content;
 			$model -> data($data) -> add();
+			echo "true";
 			return true;
 		}catch(Exception $e){
+			echo "false";
 			return false;
 		}
 		
