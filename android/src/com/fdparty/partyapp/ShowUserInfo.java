@@ -36,6 +36,9 @@ public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 		this.levelView = (TextView) findViewById(R.id.profile_level);
 		this.invokeView = (TextView) findViewById(R.id.profile_invoke_date);
 		this.submitView = (TextView) findViewById(R.id.profile_submit_date);
+		
+//		this.levelView.setOnClickListener(this);
+//		this.invokeView.setOnClickListener(this);
 
 		loadInfo();
 		

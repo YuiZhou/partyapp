@@ -50,10 +50,15 @@ class LeaderAction extends Action {
 	 * add new user
 	 */
 	public function addUser($usrid, $newUser, $name){
+		if (!preg_match("/^\d{11}$/",$newUser)){
+			echo "false";
+			return false;
+		}
+
 		$user = getUser($usrid);
 		$partyid = $user['partyid'];
 
-		echo $partyid;
+		// echo $partyid;
 
 		try{
 			$model = M("user");
@@ -63,8 +68,10 @@ class LeaderAction extends Action {
 			
 			$model -> data($data) -> add();
 			//echo $model -> getlastSql().'<br/>';
+			echo "true";
 			return true;
 		}catch(Exception $e){
+			//echo "false";
 			return false;
 		}
 	}
