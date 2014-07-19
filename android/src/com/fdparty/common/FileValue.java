@@ -1,7 +1,8 @@
 package com.fdparty.common;
 
 public enum FileValue {
-	loginInfo("conf");
+	loginInfo("conf"),
+	userInfo("user");
 	
 	
 	

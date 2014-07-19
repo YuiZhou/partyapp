@@ -48,7 +48,7 @@ public class IndexActivity extends ActionBarActivity implements OnClickListener 
 			findViewById(R.id.profile_tag).setVisibility(View.GONE);
 			findViewById(R.id.chat_tag).setVisibility(View.GONE);
 			findViewById(R.id.leader_tag).setVisibility(View.GONE);
-		}else if(!((new User(username)).isLeader())){
+		}else if(!(User.getUser().isLeader())){
 			findViewById(R.id.leader_tag).setVisibility(View.GONE);
 		}
 		
@@ -61,11 +61,6 @@ public class IndexActivity extends ActionBarActivity implements OnClickListener 
 		findViewById(R.id.leader_tag).setOnClickListener(this);
 		
 		setTag(0);
-	}
-	
-	private boolean isLeader() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -87,6 +82,11 @@ public class IndexActivity extends ActionBarActivity implements OnClickListener 
 			SharedPreferences sp = getSharedPreferences(FileValue.loginInfo.toString(), Context.MODE_PRIVATE);
 			Editor ed = sp.edit();
 			
+			ed.clear();
+			ed.commit();
+			
+			sp = getSharedPreferences(FileValue.userInfo.toString(), Context.MODE_PRIVATE);
+			ed = sp.edit();
 			ed.clear();
 			ed.commit();
 			

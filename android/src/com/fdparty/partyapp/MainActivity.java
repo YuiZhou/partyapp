@@ -4,6 +4,7 @@ import com.example.partyapp.R;
 import com.fdparty.common.FileValue;
 import com.fdparty.common.HttpValue;
 import com.fdparty.common.Login;
+import com.fdparty.common.User;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -19,12 +20,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	
-	@SuppressLint("NewApi") 
+
+	@SuppressLint("NewApi")
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		/* enable the network */
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
 				.detectDiskReads().detectDiskWrites().detectNetwork() // or
@@ -38,14 +39,19 @@ public class MainActivity extends Activity {
 				.detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
 				.penaltyLog().penaltyDeath().build());
 
-		SharedPreferences sp = getSharedPreferences(FileValue.loginInfo.toString(), Context.MODE_PRIVATE);
+		SharedPreferences sp = getSharedPreferences(
+				FileValue.loginInfo.toString(), Context.MODE_PRIVATE);
 		String usrid = sp.getString("usr", "");
 		String password = sp.getString("pwd", "");
-		
-		//Log.d("Debug", "###"+HttpValue.Server.toString() + "User/login/usr/"+usrid+"/pwd/"+password);
-		
+
+		// Log.d("Debug", "###"+HttpValue.Server.toString() +
+		// "User/login/usr/"+usrid+"/pwd/"+password);
+
 		Login lg = new Login(usrid, password);
-		if (lg.login()){
+		if (lg.login()) {
+			User.getUser(
+					getSharedPreferences(FileValue.userInfo.toString(),
+							Context.MODE_PRIVATE), usrid);
 			goToIndex(usrid);
 			return;
 		}
@@ -57,13 +63,13 @@ public class MainActivity extends Activity {
 		//
 		// }
 		// });
-//		if (savedInstanceState == null) {
-//			getSupportFragmentManager().beginTransaction()
-//					.add(R.id.container, new PlaceholderFragment()).commit();
-//		}
+		// if (savedInstanceState == null) {
+		// getSupportFragmentManager().beginTransaction()
+		// .add(R.id.container, new PlaceholderFragment()).commit();
+		// }
 	}
-	
-	public void anonymousLoginHandler(View v){
+
+	public void anonymousLoginHandler(View v) {
 		goToIndex("0");
 	}
 
@@ -82,12 +88,16 @@ public class MainActivity extends Activity {
 			Toast.makeText(this, "login failed", Toast.LENGTH_SHORT).show();
 		} else {
 			// TODO save info and go to the index page
-			SharedPreferences sp = getSharedPreferences(FileValue.loginInfo.toString(), Context.MODE_PRIVATE);
+			SharedPreferences sp = getSharedPreferences(
+					FileValue.loginInfo.toString(), Context.MODE_PRIVATE);
 			Editor ed = sp.edit();
 			ed.putString("usr", usrid);
 			ed.putString("pwd", password);
 			ed.commit();
-			
+
+			SharedPreferences info = getSharedPreferences(
+					FileValue.userInfo.toString(), Context.MODE_PRIVATE);
+			User.getUser(usrid, info);
 			/* switch */
 			goToIndex(usrid);
 		}
@@ -98,15 +108,14 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent();
 		intent.setClass(MainActivity.this, IndexActivity.class);
 		intent.putExtra("username", usrid);
-		
+
 		startActivity(intent);
 		this.finish();
-		
+
 	}
 
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
-
 
 }

@@ -1139,7 +1139,8 @@ containing a value of this type.
         public static final int news_title=0x7f03001e;
         public static final int profile_fragment=0x7f03001f;
         public static final int support_simple_spinner_dropdown_item=0x7f030020;
-        public static final int user_list=0x7f030021;
+        public static final int user_info=0x7f030021;
+        public static final int user_list=0x7f030022;
     }
     public static final class menu {
         public static final int index=0x7f0c0000;

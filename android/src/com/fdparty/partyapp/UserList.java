@@ -79,8 +79,15 @@ public class UserList extends Activity {
 		}
 	}
 
+	/**
+	 * go to the user information activity 
+	 */
 	protected void loadUser(String id) {
-		// TODO Auto-generated method stub
+		Intent intent = new Intent();
+		intent.setClass(UserList.this, ShowUserInfo.class);
+		intent.putExtra("username", id);
 		
+		startActivity(intent);
+		//this.finish();
 	}
 }
