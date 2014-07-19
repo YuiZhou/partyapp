@@ -55,8 +55,14 @@ public class NewsFragment extends Fragment {
 		loadData();
 		return layout;
 	}
+	
+	 public void onResume(){
+		 super.onResume();
+		loadData();
+	}
 
 	private void loadData() {
+		arrList.clear();
 		String url = HttpValue.Server.toString()+"Index/index/usrid/"+username+"/start/"+startId;
 		
 		try{
