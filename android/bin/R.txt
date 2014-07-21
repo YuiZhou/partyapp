@@ -367,6 +367,7 @@ int layout support_simple_spinner_dropdown_item 0x7f030022
 int layout user_list 0x7f030023
 int menu index 0x7f0c0000
 int menu main 0x7f0c0001
+int string OK 0x7f0a001d
 int string abc_action_bar_home_description 0x7f0a0001
 int string abc_action_bar_up_description 0x7f0a0002
 int string abc_action_menu_overflow_description 0x7f0a0003
@@ -384,6 +385,7 @@ int string add_news 0x7f0a001c
 int string add_user 0x7f0a001b
 int string anonymous 0x7f0a0010
 int string app_name 0x7f0a000d
+int string cancel 0x7f0a001e
 int string full_date 0x7f0a0016
 int string intern_date 0x7f0a0017
 int string interst_date 0x7f0a0018

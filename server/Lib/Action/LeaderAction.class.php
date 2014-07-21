@@ -81,7 +81,11 @@ class LeaderAction extends Action {
 
 	/* modify the user's information */
 	public function updateUser($usrid, $key, $value){
+		$isLeader = isLeader($usrid);
+		$party = getParty(getUser($usrid));
+
 		$model = M("user");
+		$model->startTrans();
 
 		$condition["usrid"] = $usrid;
 
@@ -89,13 +93,38 @@ class LeaderAction extends Action {
 
 		$result= $model -> where($condition) -> data($data) -> save();
 
-		if($result !== false){ 
+		if($result != false){
+			// If the user is a leader
+			if($isLeader){
+				$partymodel = M("party");
+				$partycondition = $party["partyid"];
+
+				if($party["leader"] == $usrid){
+					$partydata["leader"] = "";
+				}else{
+					$partydata["assistant"] = "";
+				}
+
+				$partyresult= $partymodel -> where($partycondition) -> data($partydata) -> save();
+				$partymodel -> getlastSql();
+
+				if($partyresult == false){
+					echo "false";
+					$model->rollback();
+					return false;
+				}
+			}
 			echo 'true';
 		}else{
 			echo 'false';
 		}
 
+		$model->commit(); 
+	}
 
+	public function searchParty($partyname){
+		$party = findPartyByName($partyname);
+		echo $party['partyid'];
 	}
 
 

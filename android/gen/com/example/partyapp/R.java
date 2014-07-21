@@ -1154,6 +1154,7 @@ containing a value of this type.
         public static final int main=0x7f0c0001;
     }
     public static final class string {
+        public static final int OK=0x7f0a001d;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abc_action_bar_home_description=0x7f0a0001;
@@ -1198,6 +1199,7 @@ containing a value of this type.
         public static final int add_user=0x7f0a001b;
         public static final int anonymous=0x7f0a0010;
         public static final int app_name=0x7f0a000d;
+        public static final int cancel=0x7f0a001e;
         public static final int full_date=0x7f0a0016;
         public static final int intern_date=0x7f0a0017;
         public static final int interst_date=0x7f0a0018;

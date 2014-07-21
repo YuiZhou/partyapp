@@ -1,7 +1,7 @@
 <?php
 	function getUser($usrid){
 		$usermodel = M('user');
-		 return $user = $usermodel -> where("usrid = ".$usrid) -> find();
+		return $user = $usermodel -> where("usrid = ".$usrid) -> find();
 		
 		//echo $usermodel -> getlastSql();
 	}
@@ -72,5 +72,15 @@
 		}
 
 		return date("Y-m-d",$date);
+	}
+
+	function  findPartyByName($partyname){
+		$model = M("party");
+		$party = $model -> where("partyname = '".$partyname."'") -> find();
+
+		// echo $model -> getlastSql();
+
+		return $party;
+
 	}
 ?>
