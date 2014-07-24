@@ -86,29 +86,27 @@ public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 					+ jsonObj.getString("level"));
 
 			/* what's the status? */
-			String invoke_date = "";
+//			String invoke_date = "";
 			this.state = jsonObj.getInt("status");
-			switch (state) {
-			case 0:
-				return;
-			case 1:
-				invoke_date = getString(R.string.interst_date);
-				break;
-			case 2:
-				invoke_date = getString(R.string.intern_date);
-				break;
-			case 3:
-				invoke_date = getString(R.string.full_date);
-				break;
-			}
+//			
 
-			this.invokeView.setText(invoke_date
+			this.invokeView.setText("成为"+Level.getLevel(state) + "的时间："
 					+ jsonObj.getString("invoke_date"));
 
-			String nextSubmit = jsonObj.getString("submit_date");
-			if (!nextSubmit.equals("false")) {
+//			String nextSubmit = ;
+//			if (!nextSubmit.equals("false")) {
 				this.submitView.setText(getString(R.string.next_submit_date)
-						+ nextSubmit);
+						+ jsonObj.getString("submit_date"));
+//			}
+			switch (state) {
+			case 0:
+				this.invokeView.setVisibility(View.GONE);
+			case 3:
+				this.submitView.setVisibility(View.GONE);
+				break;
+			default:
+				this.invokeView.setVisibility(View.VISIBLE);
+				this.submitView.setVisibility(View.VISIBLE);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
