@@ -86,6 +86,7 @@ public class UserList extends Activity {
 		Intent intent = new Intent();
 		intent.setClass(UserList.this, ShowUserInfo.class);
 		intent.putExtra("username", id);
+		intent.putExtra("owner", username);
 		
 		startActivity(intent);
 		//this.finish();

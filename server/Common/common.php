@@ -83,4 +83,21 @@
 		return $party;
 
 	}
+
+	function changeLeader($partyid, $level,$usrid){
+		$model = M("party");
+		$condition["partyid"] = $partyid;
+
+		$data[$level] = $usrid;
+
+		$result = $model -> where($condition) -> data($data) -> save();
+
+		if($result){
+			return "true";
+		}else{
+			return "false";
+		}
+
+
+	}
 ?>

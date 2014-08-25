@@ -9,6 +9,7 @@ import com.example.partyapp.R;
 import com.fdparty.common.HttpResponseProcess;
 import com.fdparty.common.HttpValue;
 import com.fdparty.common.Level;
+import com.fdparty.common.User;
 
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 
 public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 	private String username;
+	private String owner;
 
 	private Activity activity;
 
@@ -48,6 +50,7 @@ public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 
 		Intent intent = getIntent();
 		this.username = intent.getStringExtra("username");
+		this.owner = intent.getStringExtra("owner");
 		// Log.d("Debug",username);
 
 		this.nameView = (TextView) findViewById(R.id.profile_name);
@@ -182,8 +185,10 @@ public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 	}
 
 	private void confirmBuilder() {
+		User userOwner = User.getUser();
+		String ownerLevel = userOwner.getLevel();
 		String msg = Level.getNextLevel(state);
-		if (msg == null) {
+		if (msg == null || msg.equals(ownerLevel)) { // 党支部副书记不能任命党支部副书记
 			return;
 		}
 		Builder builder = new Builder(this);
@@ -194,7 +199,8 @@ public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface arg0, int arg1) {
-						int nowStat = state + 1;
+						// If the state overflow, that is, the leader is changing assistant
+						int nowStat = state + 1; 
 
 						String url = HttpValue.Server.toString()
 								+ "Leader/updateUser/usrid/" + username

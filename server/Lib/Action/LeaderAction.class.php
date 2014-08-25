@@ -84,6 +84,12 @@ class LeaderAction extends Action {
 		$isLeader = isLeader($usrid);
 		$party = getParty(getUser($usrid));
 
+		if($key == "status" && $value == 4){
+			/* chose the new assistant for the party */
+			echo changeLeader($party['partyid'],"assistant", $usrid);
+			return;
+		}
+
 		$model = M("user");
 		$model->startTrans();
 
@@ -94,7 +100,7 @@ class LeaderAction extends Action {
 		$result= $model -> where($condition) -> data($data) -> save();
 
 		if($result != false){
-			// If the user is a leader
+			// If the user is a leader but he go to another party
 			if($isLeader){
 				$partymodel = M("party");
 				$partycondition = $party["partyid"];

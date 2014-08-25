@@ -1,7 +1,7 @@
 package com.fdparty.common;
 
 public enum HttpValue {
-	Server("http://192.168.0.113/partyapp/server/index.php/");
+	Server("http://192.168.0.101/partyapp/server/index.php/");
 	
 	
 	
