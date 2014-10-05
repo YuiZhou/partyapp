@@ -63,7 +63,7 @@ public class NewsFragment extends Fragment {
 
 	private void loadData() {
 		arrList.clear();
-		String url = HttpValue.Server.toString()+"Index/index/usrid/"+username+"/start/"+startId;
+		String url = HttpValue.Server.toString()+"?m=Index&a=index&usrid="+username+"&start="+startId;
 		
 		try{
 			HttpResponseProcess process = new HttpResponseProcess(url);

@@ -37,7 +37,7 @@ public class AddUser extends Activity {
 	}
 
 	private boolean addUser(String id, String name) {
-		String url = HttpValue.Server.toString()+"Leader/addUser/usrid/"+username+"/newUser/"+id+"/name/"+name;
+		String url = HttpValue.Server.toString()+"?m=Leader&a=addUser&usrid="+username+"&newUser="+id+"&name="+name;
 		
 		try{
 			HttpResponseProcess process = new HttpResponseProcess(url);

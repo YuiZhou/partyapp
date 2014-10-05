@@ -1,10 +1,10 @@
-package com.fdparty.partyapp;
+package com.fdparty.login;
 
 import com.example.partyapp.R;
 import com.fdparty.common.FileValue;
-import com.fdparty.common.HttpValue;
 import com.fdparty.common.Login;
 import com.fdparty.common.User;
+import com.fdparty.partyapp.IndexActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,7 +14,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;

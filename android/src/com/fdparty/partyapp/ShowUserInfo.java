@@ -70,7 +70,7 @@ public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 	}
 
 	private void loadInfo() {
-		String url = HttpValue.Server.toString() + "User/getUserInfo/usrid/"
+		String url = HttpValue.Server.toString() + "?m=User&a=getUserInfo&usrid="
 				+ username;
 
 		try {
@@ -152,8 +152,8 @@ public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 				/* update the date*/
 				String date = year+"-"+(monthOfYear + 1)+"-"+dayOfMonth;
 				String url = HttpValue.Server.toString()
-						+ "Leader/updateUser/usrid/" + username
-						+ "/key/invoke_date/value/" + date;
+						+ "?m=Leader&a=updateUser&usrid=" + username
+						+ "&key=invoke_date&value=" + date;
 				try {
 					HttpResponseProcess process = new HttpResponseProcess(
 							url);
@@ -203,8 +203,8 @@ public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 						int nowStat = state + 1; 
 
 						String url = HttpValue.Server.toString()
-								+ "Leader/updateUser/usrid/" + username
-								+ "/key/status/value/" + nowStat;
+								+ "?m=Leader&a=updateUser&usrid=" + username
+								+ "&key=status&value=" + nowStat;
 						try {
 							HttpResponseProcess process = new HttpResponseProcess(
 									url);
@@ -248,18 +248,18 @@ public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 
 						if (id == 0) {
 							url = HttpValue.Server.toString()
-									+ "Leader/updateUser/usrid/" + username
-									+ "/key/username/value/" + name;
+									+ "?m=Leader&a=updateUser&usrid=" + username
+									+ "&key=username&value=" + name;
 						} else {
 							url = HttpValue.Server.toString()
-									+ "Leader/searchParty/partyname/" + name;
+									+ "?m=Leader&a=searchParty&partyname=" + name;
 							try {
 								HttpResponseProcess process = new HttpResponseProcess(
 										url);
 								String partyid = process.toString().trim();
 								url = HttpValue.Server.toString()
-										+ "Leader/updateUser/usrid/" + username
-										+ "/key/partyid/value/" + partyid;
+										+ "?m=Leader&a=updateUser&usrid=" + username
+										+ "&key=partyid&value=" + partyid;
 
 							} catch (Exception e) {
 								Toast.makeText(activity, "find party failed",

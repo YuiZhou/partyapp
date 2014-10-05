@@ -29,7 +29,7 @@ public class NewsDetailActivity extends ActionBarActivity {
 	}
 
 	private void loadData() {
-		String url = HttpValue.Server+"Index/getNews/newsid/"+id;
+		String url = HttpValue.Server+"?m=Index&a=getNews&newsid="+id;
 		
 		try{
 			HttpResponseProcess process = new HttpResponseProcess(url);

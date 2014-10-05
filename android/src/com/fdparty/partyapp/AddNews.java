@@ -40,8 +40,8 @@ public class AddNews extends Activity {
 	}
 
 	public boolean addNews(String title, String content) {
-		String url = HttpValue.Server.toString() + "Leader/addNews/usrid/"
-				+ username + "/title/" + title + "/content/" + content;
+		String url = HttpValue.Server.toString() + "?m=Leader&a=addNews&usrid="
+				+ username + "&title=" + title + "&content=" + content;
 
 		try {
 			HttpResponseProcess process = new HttpResponseProcess(url);

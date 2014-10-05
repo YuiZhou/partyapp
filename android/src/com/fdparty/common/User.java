@@ -56,7 +56,7 @@ public class User {
 	}
 
 	private void loadInfo() {
-		String url = HttpValue.Server.toString() + "User/getUserInfo/usrid/"
+		String url = HttpValue.Server.toString() + "?m=User&a=getUserInfo&usrid="
 				+ usrid;
 
 		try {
@@ -140,7 +140,7 @@ public class User {
 	}
 
 	public void loadIsLeader() {
-		String url = HttpValue.Server.toString() + "User/isLeader/usrid/"
+		String url = HttpValue.Server.toString() + "?m=User&a=isLeader&usrid="
 				+ usrid;
 		try {
 			HttpResponseProcess process = new HttpResponseProcess(url);

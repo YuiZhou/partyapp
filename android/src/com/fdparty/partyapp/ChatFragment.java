@@ -79,8 +79,8 @@ public class ChatFragment extends Fragment {
 	}
 
 	protected void pushData(String comment) {
-		String url = HttpValue.Server.toString() + "User/pushCmt/usrid/"
-				+ username + "/cmt/" + comment;
+		String url = HttpValue.Server.toString() + "?m=User&a=pushCmt&usrid="
+				+ username + "&cmt=" + comment;
 
 		try {
 			HttpResponseProcess process = new HttpResponseProcess(url);
@@ -93,7 +93,7 @@ public class ChatFragment extends Fragment {
 	private void loadData() {
 		arrList.clear();
 
-		String url = HttpValue.Server.toString() + "User/getCmt";
+		String url = HttpValue.Server.toString() + "?m=User&a=getCmt";
 
 		try {
 			HttpResponseProcess process = new HttpResponseProcess(url);

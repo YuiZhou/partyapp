@@ -16,7 +16,7 @@ public class Login {
 //		username = "11302010067";
 //		password = "11302010067";
 		
-		String url = HttpValue.Server.toString() + "User/login/usr/"+username+"/pwd/"+password;
+		String url = HttpValue.Server.toString() + "?m=User&a=login&usr="+username+"&pwd="+password;
 		
 		try{
 			

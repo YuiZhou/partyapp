@@ -37,7 +37,7 @@ public class UserList extends Activity {
 	}
 	
 	private void loadData() {
-		String url = HttpValue.Server.toString()+"Leader/getUserList/usrid/"+username;
+		String url = HttpValue.Server.toString()+"?m=Leader&a=getUserList&usrid="+username;
 		
 		try{
 			HttpResponseProcess process = new HttpResponseProcess(url);
