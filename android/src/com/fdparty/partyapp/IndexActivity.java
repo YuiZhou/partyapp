@@ -5,23 +5,26 @@ import com.fdparty.common.FileValue;
 import com.fdparty.common.User;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.backup.SharedPreferencesBackupHelper;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
 
-public class IndexActivity extends ActionBarActivity implements OnClickListener {
+public class IndexActivity extends Activity implements OnClickListener {
 	
 	/* fragments */
 	private NewsFragment newsFragment;
@@ -37,6 +40,11 @@ public class IndexActivity extends ActionBarActivity implements OnClickListener 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_index);
+		
+//		ImageView index_logo = (ImageView)findViewById(R.id.index_logo);
+//		LayoutParams para= index_logo.getLayoutParams();
+//		para.width = para.height;
+//		index_logo.setLayoutParams(para);
 		
 		Intent intent = getIntent();
 		this.username = intent.getStringExtra("username");
@@ -125,7 +133,7 @@ public class IndexActivity extends ActionBarActivity implements OnClickListener 
 	@SuppressLint("NewApi") 
 	private void setTag(int id){
 		if(fragmentManager == null)
-			fragmentManager = getSupportFragmentManager();
+			fragmentManager = getFragmentManager();
 		FragmentTransaction transaction = fragmentManager.beginTransaction(); 
 		
 		if(nowFragment != null){

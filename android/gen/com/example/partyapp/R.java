@@ -457,14 +457,6 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int logo=0x7f010029;
-        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int metaButtonBarButtonStyle=0x7f01006b;
-        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int metaButtonBarStyle=0x7f01006a;
         /**  The type of navigation to use. 
          <p>Must be one of the following constant values.</p>
 <table>
@@ -802,11 +794,10 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f070004;
+        public static final int abc_search_url_text_holo=0x7f070003;
         public static final int abc_search_url_text_normal=0x7f070000;
         public static final int abc_search_url_text_pressed=0x7f070002;
         public static final int abc_search_url_text_selected=0x7f070001;
-        public static final int black_overlay=0x7f070003;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -994,8 +985,9 @@ containing a value of this type.
         public static final int login_background=0x7f020058;
         public static final int login_bt=0x7f020059;
         public static final int login_input=0x7f02005a;
-        public static final int welcome_background=0x7f02005b;
-        public static final int welcome_copyright=0x7f02005c;
+        public static final int logo=0x7f02005b;
+        public static final int welcome_background=0x7f02005c;
+        public static final int welcome_copyright=0x7f02005d;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
@@ -1041,24 +1033,25 @@ containing a value of this type.
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
+        public static final int index_logo=0x7f05005a;
         public static final int leader_add_news=0x7f050058;
         public static final int leader_add_user=0x7f050059;
         public static final int leader_tag=0x7f050046;
         public static final int leader_user_list=0x7f050057;
-        public static final int list=0x7f05005a;
+        public static final int list=0x7f05005b;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
-        public static final int list_stu_id=0x7f050063;
-        public static final int list_stu_name=0x7f050064;
+        public static final int list_stu_id=0x7f050064;
+        public static final int list_stu_name=0x7f050065;
         public static final int login=0x7f05004c;
         public static final int login_button_field=0x7f05004b;
         public static final int login_password_field=0x7f050048;
         public static final int login_username_field=0x7f050047;
-        public static final int logout=0x7f050065;
+        public static final int logout=0x7f050066;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
-        public static final int newsDateView=0x7f05005c;
-        public static final int newsTitleView=0x7f05005b;
+        public static final int newsDateView=0x7f05005d;
+        public static final int newsTitleView=0x7f05005c;
         public static final int news_detail_content=0x7f050050;
         public static final int news_detail_date=0x7f05004f;
         public static final int news_detail_title=0x7f05004e;
@@ -1066,16 +1059,16 @@ containing a value of this type.
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
         public static final int password=0x7f05004a;
-        public static final int profile_invoke_date=0x7f05005e;
-        public static final int profile_level=0x7f050060;
-        public static final int profile_name=0x7f05005d;
-        public static final int profile_party=0x7f050061;
-        public static final int profile_stu_id=0x7f050062;
-        public static final int profile_submit_date=0x7f05005f;
+        public static final int profile_invoke_date=0x7f05005f;
+        public static final int profile_level=0x7f050061;
+        public static final int profile_name=0x7f05005e;
+        public static final int profile_party=0x7f050062;
+        public static final int profile_stu_id=0x7f050063;
+        public static final int profile_submit_date=0x7f050060;
         public static final int profile_tag=0x7f050045;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
-        public static final int quit=0x7f050066;
+        public static final int quit=0x7f050067;
         public static final int radio=0x7f05002f;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
@@ -1161,10 +1154,11 @@ containing a value of this type.
         public static final int comment=0x7f03001e;
         public static final int leader_fragment=0x7f03001f;
         public static final int list_fragment=0x7f030020;
-        public static final int news_title=0x7f030021;
-        public static final int profile_fragment=0x7f030022;
-        public static final int support_simple_spinner_dropdown_item=0x7f030023;
-        public static final int user_list=0x7f030024;
+        public static final int news_fragment=0x7f030021;
+        public static final int news_title=0x7f030022;
+        public static final int profile_fragment=0x7f030023;
+        public static final int support_simple_spinner_dropdown_item=0x7f030024;
+        public static final int user_list=0x7f030025;
     }
     public static final class menu {
         public static final int index=0x7f0c0000;
@@ -2036,46 +2030,6 @@ containing a value of this type.
           @attr name com.example.partyapp:initialActivityCount
         */
         public static final int ActivityChooserView_initialActivityCount = 0;
-        /** 
-         Declare custom theme attributes that allow changing which styles are
-         used for button bars depending on the API level.
-         ?android:attr/buttonBarStyle is new as of API 11 so this is
-         necessary to support previous API levels.
-    
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ButtonBarContainerTheme_metaButtonBarButtonStyle com.example.partyapp:metaButtonBarButtonStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ButtonBarContainerTheme_metaButtonBarStyle com.example.partyapp:metaButtonBarStyle}</code></td><td></td></tr>
-           </table>
-           @see #ButtonBarContainerTheme_metaButtonBarButtonStyle
-           @see #ButtonBarContainerTheme_metaButtonBarStyle
-         */
-        public static final int[] ButtonBarContainerTheme = {
-            0x7f01006a, 0x7f01006b
-        };
-        /**
-          <p>This symbol is the offset where the {@link com.example.partyapp.R.attr#metaButtonBarButtonStyle}
-          attribute's value can be found in the {@link #ButtonBarContainerTheme} array.
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.example.partyapp:metaButtonBarButtonStyle
-        */
-        public static final int ButtonBarContainerTheme_metaButtonBarButtonStyle = 1;
-        /**
-          <p>This symbol is the offset where the {@link com.example.partyapp.R.attr#metaButtonBarStyle}
-          attribute's value can be found in the {@link #ButtonBarContainerTheme} array.
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.example.partyapp:metaButtonBarStyle
-        */
-        public static final int ButtonBarContainerTheme_metaButtonBarStyle = 0;
         /** Attributes that can be used with a CompatTextView.
            <p>Includes the following attributes:</p>
            <table>
