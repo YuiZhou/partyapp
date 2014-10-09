@@ -26,7 +26,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/news"
-            android:textColor="@color/fontColor"
+            android:textStyle="bold"
+            android:textColor="@color/notChoseTag"
             android:textSize="16sp" />
 
         <TextView
@@ -37,7 +38,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/chat"
-            android:textColor="@color/fontColor"
+            android:textStyle="bold"
+            android:textColor="@color/notChoseTag"
             android:textSize="16sp" />
 
         <TextView
@@ -48,7 +50,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/profile"
-            android:textColor="@color/fontColor"
+            android:textStyle="bold"
+            android:textColor="@color/notChoseTag"
             android:textSize="16sp" />
 
         <TextView
@@ -59,7 +62,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/leader"
-            android:textColor="@color/fontColor"
+            android:textStyle="bold"
+            android:textColor="@color/notChoseTag"
             android:textSize="16sp" />
     </LinearLayout>
 

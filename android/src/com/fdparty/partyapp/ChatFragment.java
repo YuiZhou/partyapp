@@ -103,8 +103,7 @@ public class ChatFragment extends Fragment {
 				Map<String, Object> item = new HashMap<String, Object>();
 				JSONObject jsonObj = (JSONObject) jsonObjs.opt(i);
 
-				item.put("userid", jsonObj.get("userid"));
-				item.put("username", jsonObj.get("username"));
+				item.put("userid", jsonObj.get("userid") + " "+ jsonObj.get("username"));
 				item.put("content", jsonObj.get("content"));
 
 				// Log.d("Debug","title: "+
@@ -113,8 +112,8 @@ public class ChatFragment extends Fragment {
 			}
 
 			SimpleAdapter adapter = new SimpleAdapter(this.activity, arrList,
-					R.layout.comment, new String[] { "userid", "username" ,"content"},
-					new int[] { R.id.comment_userid, R.id.comment_username, R.id.comment_content });
+					R.layout.news_title, new String[] { "userid", "content"},
+					new int[] { R.id.newsTitleView,R.id.newsDateView});
 			this.list.setAdapter(adapter);
 
 		} catch (Exception e) {

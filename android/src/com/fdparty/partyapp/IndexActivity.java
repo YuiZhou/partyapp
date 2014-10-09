@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class IndexActivity extends Activity implements OnClickListener {
 	
@@ -37,7 +39,7 @@ public class IndexActivity extends Activity implements OnClickListener {
 	
 	private FragmentManager fragmentManager;
 	
-	protected void onCreate(Bundle savedInstanceState) {
+	@SuppressLint("NewApi") protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_index);
 		
@@ -68,7 +70,8 @@ public class IndexActivity extends Activity implements OnClickListener {
 		findViewById(R.id.profile_tag).setOnClickListener(this);
 		findViewById(R.id.leader_tag).setOnClickListener(this);
 		
-		setTag(0);
+		findViewById(R.id.news_tag).callOnClick();
+//		setTag(0);
 	}
 
 	@Override
@@ -113,6 +116,7 @@ public class IndexActivity extends Activity implements OnClickListener {
 	 * 2 - chatRoom
 	 * 3 - Profile 
 	 */
+	@SuppressLint("ResourceAsColor") 
 	public void onClick(View v){
 		switch(v.getId()){
 		case R.id.news_tag:
@@ -128,6 +132,8 @@ public class IndexActivity extends Activity implements OnClickListener {
 			setTag(3);
 			break;
 		}
+		v.setBackgroundResource(R.drawable.index_chosed);
+		((TextView)v).setTextColor(this.getResources().getColor(R.color.choseTag));
 	}
 	
 	@SuppressLint("NewApi") 
@@ -137,6 +143,7 @@ public class IndexActivity extends Activity implements OnClickListener {
 		FragmentTransaction transaction = fragmentManager.beginTransaction(); 
 		
 		if(nowFragment != null){
+			resetTag();
 			transaction.hide(nowFragment);
 		}
 		
@@ -174,6 +181,26 @@ public class IndexActivity extends Activity implements OnClickListener {
 		
 		transaction.show(nowFragment);
 		transaction.commit();
+		
+	}
+
+	/**
+	 * reset the tag of noeFragment to the init background, as it has not been chosed
+	 */
+	@SuppressLint("ResourceAsColor") 
+	private void resetTag() {
+		TextView view = null;
+		if(nowFragment == newsFragment){
+			view = (TextView) findViewById(R.id.news_tag);
+		}else if(nowFragment == chatFragment){
+			view = (TextView) findViewById(R.id.chat_tag);
+		}else if(nowFragment == profileFragment){
+			view = (TextView) findViewById(R.id.profile_tag);
+		}else{
+			view = (TextView) findViewById(R.id.leader_tag);
+		}
+		view.setTextColor(this.getResources().getColor(R.color.notChoseTag));
+		view.setBackgroundResource(R.drawable.login_background);
 		
 	}
 	

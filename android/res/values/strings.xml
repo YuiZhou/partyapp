@@ -24,5 +24,7 @@
     <string name="chat">聊天</string>
     <string name="profile">个人</string>
     <string name="leader">管理</string>
+    <string name="submit">确认发送</string>
+    <string name="chat_input">输入140字……</string>
 
 </resources>

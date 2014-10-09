@@ -2,28 +2,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/comment_input"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine" >
+        android:layout_height="0dp"
+        android:layout_weight="0.425"
+        android:background="@drawable/chat_bg"
+        android:orientation="vertical" >
+		<TextView 
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight="0.26"/>
+        <EditText
+            android:id="@+id/comment_input"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.57"
+            android:background="@drawable/item_bg"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:singleLine="false"
+            android:gravity="top"
+            android:hint="@string/chat_input" >
 
-        <requestFocus />
-    </EditText>
+            <requestFocus />
+        </EditText>
 
-    <Button
-        android:id="@+id/submit_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="submit" />
+        <Button
+            android:id="@+id/submit_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.17"
+            android:layout_gravity="right"
+            android:background="@drawable/login_bt"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/submit"
+            android:textStyle="bold"
+            android:maxLength="140"
+            android:textColor="@color/notChoseTag" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/comment_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dp"
+        android:layout_weight="0.575" >
     </ListView>
 
 </LinearLayout>

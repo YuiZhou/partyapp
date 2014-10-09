@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="fontColor">#957764</color>
+    <color name="choseTag">#3D0304</color>
+    <color name="notChoseTag">#D0CECE</color>
 </resources>
