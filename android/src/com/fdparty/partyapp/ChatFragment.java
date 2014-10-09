@@ -14,13 +14,19 @@ import com.fdparty.common.HttpValue;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -74,51 +80,74 @@ public class ChatFragment extends Fragment {
 		});
 
 		loadData();
-		
+
 		return layout;
 	}
 
 	protected void pushData(String comment) {
 		String url = HttpValue.Server.toString() + "?m=User&a=pushCmt&usrid="
 				+ username + "&cmt=" + comment;
-
+		String toast = "未知错误";
 		try {
 			HttpResponseProcess process = new HttpResponseProcess(url);
 			loadData();
+			toast = "您的留言\n已发送成功！";
 		} catch (Exception e) {
-			Toast.makeText(activity, "网络异常请稍后再试", Toast.LENGTH_SHORT).show();
+			toast = "网络异常\n请稍后再试！";
+		}finally{
+			Toast toastFiled = Toast.makeText(activity,
+				     toast, Toast.LENGTH_LONG);
+			toastFiled.setGravity(Gravity.CENTER, 0, 0);
+//			toastFiled.setView(view);
+			toastFiled.show();
 		}
 	}
 
 	private void loadData() {
-		arrList.clear();
+		new Thread() {
+			public void run() {
+				Log.e("NOTICE", "HERE");
+				String url = HttpValue.Server.toString() + "?m=User&a=getCmt";
+				try {
+					HttpResponseProcess process = new HttpResponseProcess(url);
+					String res = process.toString();
+					JSONArray jsonObjs = new JSONArray(res);
+					arrList.clear();
+					for (int i = 0; i < jsonObjs.length(); i++) {
+						Map<String, Object> item = new HashMap<String, Object>();
+						JSONObject jsonObj = (JSONObject) jsonObjs.opt(i);
 
-		String url = HttpValue.Server.toString() + "?m=User&a=getCmt";
+						item.put("userid", jsonObj.get("userid") + " "
+								+ jsonObj.get("username"));
+						item.put("content", jsonObj.get("content"));
 
-		try {
-			HttpResponseProcess process = new HttpResponseProcess(url);
-			String res = process.toString();
-			JSONArray jsonObjs = new JSONArray(res);
-			for (int i = 0; i < jsonObjs.length(); i++) {
-				Map<String, Object> item = new HashMap<String, Object>();
-				JSONObject jsonObj = (JSONObject) jsonObjs.opt(i);
+						// Log.d("Debug","title: "+
+						// jsonObj.get("title")+"date: "+jsonObj.get("date"));
+						arrList.add(item);
+					}
 
-				item.put("userid", jsonObj.get("userid") + " "+ jsonObj.get("username"));
-				item.put("content", jsonObj.get("content"));
+					SimpleAdapter adapter = new SimpleAdapter(activity,
+							arrList, R.layout.news_title, new String[] {
+									"userid", "content" }, new int[] {
+									R.id.newsTitleView, R.id.newsDateView });
+					
+					Message msg = new Message();
+					msg.obj = adapter;
+					handler.sendMessage(msg);
+					
 
-				// Log.d("Debug","title: "+
-				// jsonObj.get("title")+"date: "+jsonObj.get("date"));
-				arrList.add(item);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 
-			SimpleAdapter adapter = new SimpleAdapter(this.activity, arrList,
-					R.layout.news_title, new String[] { "userid", "content"},
-					new int[] { R.id.newsTitleView,R.id.newsDateView});
-			this.list.setAdapter(adapter);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		}.start();
 	}
-
+	
+	private Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg){
+			list.setAdapter((SimpleAdapter)msg.obj);
+		}
+	};
 }

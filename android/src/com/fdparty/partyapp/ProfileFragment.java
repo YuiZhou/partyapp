@@ -6,6 +6,7 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.example.partyapp.R;
+import com.fdparty.common.FileValue;
 import com.fdparty.common.HttpResponseProcess;
 import com.fdparty.common.HttpValue;
 import com.fdparty.common.Level;
@@ -15,13 +16,17 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 @SuppressLint({ "NewApi", "ValidFragment" })
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements OnClickListener {
 
 	private TextView nameView;
 	private TextView idView;
@@ -54,6 +59,8 @@ public class ProfileFragment extends Fragment {
 				.findViewById(R.id.profile_invoke_date);
 		this.submitView = (TextView) layout
 				.findViewById(R.id.profile_submit_date);
+		
+		(layout.findViewById(R.id.logout)).setOnClickListener(this);;
 
 		loadInfo();
 		return layout;
@@ -95,5 +102,27 @@ public class ProfileFragment extends Fragment {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()){
+		case R.id.logout:
+			/* logout the app */
+			SharedPreferences sp = activity.getSharedPreferences(FileValue.loginInfo.toString(), Context.MODE_PRIVATE);
+			Editor ed = sp.edit();
+			
+			ed.clear();
+			ed.commit();
+			
+			sp = activity.getSharedPreferences(FileValue.userInfo.toString(), Context.MODE_PRIVATE);
+			ed = sp.edit();
+			ed.clear();
+			ed.commit();
+			
+			System.exit(0);
+			break;
+		}
+		
 	}
 }

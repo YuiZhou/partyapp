@@ -74,40 +74,40 @@ public class IndexActivity extends Activity implements OnClickListener {
 //		setTag(0);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.index, menu);
+//		return true;
+//	}
 
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.index, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.logout) {
-			/* logout the app */
-			SharedPreferences sp = getSharedPreferences(FileValue.loginInfo.toString(), Context.MODE_PRIVATE);
-			Editor ed = sp.edit();
-			
-			ed.clear();
-			ed.commit();
-			
-			sp = getSharedPreferences(FileValue.userInfo.toString(), Context.MODE_PRIVATE);
-			ed = sp.edit();
-			ed.clear();
-			ed.commit();
-			
-			System.exit(0);
-			return true;
-		}else if(id == R.id.quit){
-			System.exit(0);
-		}
-		return super.onOptionsItemSelected(item);
-	}
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		// Handle action bar item clicks here. The action bar will
+//		// automatically handle clicks on the Home/Up button, so long
+//		// as you specify a parent activity in AndroidManifest.xml.
+//		int id = item.getItemId();
+//		if (id == R.id.logout) {
+//			/* logout the app */
+//			SharedPreferences sp = getSharedPreferences(FileValue.loginInfo.toString(), Context.MODE_PRIVATE);
+//			Editor ed = sp.edit();
+//			
+//			ed.clear();
+//			ed.commit();
+//			
+//			sp = getSharedPreferences(FileValue.userInfo.toString(), Context.MODE_PRIVATE);
+//			ed = sp.edit();
+//			ed.clear();
+//			ed.commit();
+//			
+//			System.exit(0);
+//			return true;
+//		}else if(id == R.id.quit){
+//			System.exit(0);
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 	
 	
 	

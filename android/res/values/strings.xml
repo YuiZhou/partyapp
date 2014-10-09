@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">PartyApp</string>
-    <string name="logout">logout</string>
+    <string name="logout">退出登录</string>
     <string name="login">登陆</string>
     <string name="anonymous">游客</string>
     <string name="quit">退出</string>
