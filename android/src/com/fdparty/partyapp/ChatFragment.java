@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,18 +31,21 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import android.widget.AbsListView.OnScrollListener;
 
 @SuppressLint({ "NewApi", "ValidFragment" })
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements OnScrollListener {
 
 	private Activity activity;
 	private String username;
 	ArrayList<Map<String, Object>> arrList;
+	private int startID = 0;
 
 	/* controllers */
 	private EditText commentView;
 	private Button submitBt;
 	private ListView list;
+	private boolean hasLoad = false;
 
 	public ChatFragment(Activity activity, String username) {
 		this.activity = activity;
@@ -78,6 +82,13 @@ public class ChatFragment extends Fragment {
 				commentView.setText("");
 			}
 		});
+		
+		SimpleAdapter adapter = new SimpleAdapter(activity,
+				arrList, R.layout.news_title, new String[] {
+						"userid", "content" }, new int[] {
+						R.id.newsTitleView, R.id.newsDateView });
+		list.setAdapter(adapter);
+		list.setOnScrollListener(this);
 
 		loadData();
 
@@ -106,48 +117,85 @@ public class ChatFragment extends Fragment {
 	private void loadData() {
 		new Thread() {
 			public void run() {
-				Log.e("NOTICE", "HERE");
-				String url = HttpValue.Server.toString() + "?m=User&a=getCmt";
-				try {
-					HttpResponseProcess process = new HttpResponseProcess(url);
-					String res = process.toString();
-					JSONArray jsonObjs = new JSONArray(res);
-					arrList.clear();
-					for (int i = 0; i < jsonObjs.length(); i++) {
-						Map<String, Object> item = new HashMap<String, Object>();
-						JSONObject jsonObj = (JSONObject) jsonObjs.opt(i);
-
-						item.put("userid", jsonObj.get("userid") + " "
-								+ jsonObj.get("username"));
-						item.put("content", jsonObj.get("content"));
-
-						// Log.d("Debug","title: "+
-						// jsonObj.get("title")+"date: "+jsonObj.get("date"));
-						arrList.add(item);
-					}
-
-					SimpleAdapter adapter = new SimpleAdapter(activity,
-							arrList, R.layout.news_title, new String[] {
-									"userid", "content" }, new int[] {
-									R.id.newsTitleView, R.id.newsDateView });
-					
-					Message msg = new Message();
-					msg.obj = adapter;
-					handler.sendMessage(msg);
-					
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				startID = 0;
+				hasLoad = true;
+				loadMoreData(true);
 			}
 
 		}.start();
 	}
 	
+	/**
+	 * After adding a new chat message, the chat part should be reloaded.
+	 */
+	protected void loadMoreData(boolean isReload) {
+		String url = HttpValue.Server.toString() + "?m=User&a=getCmt&start="+startID;
+		try {
+			HttpResponseProcess process = new HttpResponseProcess(url);
+			String res = process.toString();
+			JSONArray jsonObjs = new JSONArray(res);
+			if(isReload){
+				arrList.clear();
+			}
+			for (int i = 0; i < jsonObjs.length(); i++) {
+				Map<String, Object> item = new HashMap<String, Object>();
+				JSONObject jsonObj = (JSONObject) jsonObjs.opt(i);
+
+				item.put("userid", jsonObj.get("userid") + " "
+						+ jsonObj.get("username"));
+				item.put("content", jsonObj.get("content"));
+
+				// Log.d("Debug","title: "+
+				// jsonObj.get("title")+"date: "+jsonObj.get("date"));
+				arrList.add(item);
+			}
+
+			
+			
+			Message msg = new Message();
+			msg.what = 1;
+			handler.sendMessage(msg);
+			hasLoad = false;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	private Handler handler = new Handler(){
 		@Override
 		public void handleMessage(Message msg){
-			list.setAdapter((SimpleAdapter)msg.obj);
+			switch(msg.what){
+			case 1:
+				SimpleAdapter adapter = (SimpleAdapter) list.getAdapter();
+				adapter.notifyDataSetChanged();
+				break;
+			}
 		}
 	};
+	
+	/******************************************************
+	 * The following function process the automatically 
+	 * load data when the scroll come to the bottom
+	 ******************************************************/
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+		int visibleItemCount, int totalItemCount) {
+		int lastItemId = list.getLastVisiblePosition();	/* get the last visible one */
+		if (!hasLoad && (lastItemId + 1) == totalItemCount) {	/* if it reaches bottom */
+			startID = totalItemCount;
+			hasLoad = true;
+			new Thread() {
+				public void run() {
+					loadMoreData(false);
+				}
+			}.start();
+		}
+
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView arg0, int arg1) {
+	}
 }

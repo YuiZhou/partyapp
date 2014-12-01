@@ -22,13 +22,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 @SuppressLint({ "NewApi", "ValidFragment" })
-public class NewsFragment extends Fragment {
+public class NewsFragment extends Fragment implements OnScrollListener {
 
 	private int startId = 0;
 	private String username;
@@ -67,6 +70,12 @@ public class NewsFragment extends Fragment {
 				readNews(id);
 			}
 		});
+		SimpleAdapter adapter = new SimpleAdapter(activity,
+				arrList, R.layout.news_title, new String[] {
+						"title", "date" }, new int[] {
+						R.id.newsTitleView, R.id.newsDateView });
+		this.list.setAdapter(adapter);
+		this.list.setOnScrollListener(this);
 		return layout;
 	}
 
@@ -76,43 +85,50 @@ public class NewsFragment extends Fragment {
 	}
 
 	private void loadData() {
-
+		
 		new Thread() {
 			public void run() {
-				String url = HttpValue.Server.toString()
-						+ "?m=Index&a=index&usrid=" + username + "&start="
-						+ startId;
-				try {
-					HttpResponseProcess process = new HttpResponseProcess(url);
-					String res = process.toString();
-					JSONArray jsonObjs = new JSONArray(res);
-					arrList.clear();
-					for (int i = 0; i < jsonObjs.length(); i++) {
-						Map<String, Object> item = new HashMap<String, Object>();
-						JSONObject jsonObj = (JSONObject) jsonObjs.opt(i);
-
-						item.put("title", jsonObj.get("title"));
-						item.put("date", jsonObj.get("date"));
-						item.put("id", jsonObj.get("id"));
-
-						// Log.d("Debug","title: "+
-						// jsonObj.get("title")+"date: "+jsonObj.get("date"));
-						arrList.add(item);
-					}
-
-					SimpleAdapter adapter = new SimpleAdapter(activity,
-							arrList, R.layout.news_title, new String[] {
-									"title", "date" }, new int[] {
-									R.id.newsTitleView, R.id.newsDateView });
-					Message msg = new Message();
-					msg.obj = adapter;
-					handler.sendMessage(msg);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				startId = 0;
+				loadMoreData(true);
 			}
 		}.start();
+	}
+
+	protected void loadMoreData(boolean isReload) {
+		String url = HttpValue.Server.toString()
+				+ "?m=Index&a=index&usrid=" + username + "&start="
+				+ startId;
+		try {
+			HttpResponseProcess process = new HttpResponseProcess(url);
+			String res = process.toString();
+			JSONArray jsonObjs = new JSONArray(res);
+			if(isReload){
+				arrList.clear();
+			}
+			for (int i = 0; i < jsonObjs.length(); i++) {
+				Map<String, Object> item = new HashMap<String, Object>();
+				JSONObject jsonObj = (JSONObject) jsonObjs.opt(i);
+
+				item.put("title", jsonObj.get("title"));
+				item.put("date", jsonObj.get("date"));
+				item.put("id", jsonObj.get("id"));
+
+				// Log.d("Debug","title: "+
+				// jsonObj.get("title")+"date: "+jsonObj.get("date"));
+				arrList.add(item);
+			}
+			
+			
+
+			
+			Message msg = new Message();
+			msg.what = 1;
+			handler.sendMessage(msg);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	protected void readNews(String id) {
@@ -120,7 +136,6 @@ public class NewsFragment extends Fragment {
 		intent.setClass(this.activity, NewsDetailActivity.class);
 		// intent.putExtra("username", username);
 		intent.putExtra("id", id);
-
 		startActivity(intent);
 
 	}
@@ -139,7 +154,35 @@ public class NewsFragment extends Fragment {
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			list.setAdapter((SimpleAdapter) msg.obj);
+			//list.setAdapter((SimpleAdapter) msg.obj);
+			switch(msg.what){
+			case 1:
+				SimpleAdapter adapter = (SimpleAdapter) list.getAdapter();
+				adapter.notifyDataSetChanged();
+			}
 		}
 	};
+
+	/******************************************************
+	 * The following function process the automatically 
+	 * load data when the scroll come to the bottom
+	 ******************************************************/
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+		int visibleItemCount, int totalItemCount) {
+		int lastItemId = list.getLastVisiblePosition();	/* get the last visible one */
+		if ((lastItemId + 1) == totalItemCount) {	/* if it reaches bottom */
+			startId = lastItemId;
+			new Thread() {
+				public void run() {
+					loadMoreData(false);
+				}
+			}.start();
+		}
+
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView arg0, int arg1) {
+	}
 }
