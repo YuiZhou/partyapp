@@ -26,6 +26,8 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.Gallery;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -33,12 +35,14 @@ import android.widget.SimpleAdapter;
 @SuppressLint({ "NewApi", "ValidFragment" })
 public class NewsFragment extends Fragment implements OnScrollListener {
 
+	private int expandedViewID = -1;
 	private int startId = 0;
 	private String username;
 
 	private Activity activity;
 	private ListView list;
 	private ArrayList<Map<String, Object>> arrList;
+	private boolean hasLoad = false;
 
 	public NewsFragment(Activity activity, String username) {
 		this.activity = activity;
@@ -63,11 +67,22 @@ public class NewsFragment extends Fragment implements OnScrollListener {
 		this.list.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int index,
-					long arg3) {
+			public void onItemClick(AdapterView<?> parent, View view, int index,
+					long id) {
+				/* hide the old expanded one and the new one visible */
+				if(expandedViewID >= 0){
+					parent.getChildAt(expandedViewID).findViewById(R.id.newsPreview)
+						.setVisibility(View.GONE);
+				}
+				if(expandedViewID != index){
+					view.findViewById(R.id.newsPreview).setVisibility(View.VISIBLE);
+					expandedViewID = index;
+				}else{
+					expandedViewID = -1;
+				}
 				Map<String, Object> item = arrList.get(index);
-				String id = (String) item.get("id");
-				readNews(id);
+				String newsId = (String) item.get("id");
+				readNews(view, newsId);
 			}
 		});
 		SimpleAdapter adapter = new SimpleAdapter(activity,
@@ -118,26 +133,54 @@ public class NewsFragment extends Fragment implements OnScrollListener {
 				arrList.add(item);
 			}
 			
-			
-
-			
 			Message msg = new Message();
 			msg.what = 1;
 			handler.sendMessage(msg);
-
+			
+			hasLoad  = false;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
 
-	protected void readNews(String id) {
-		Intent intent = new Intent();
-		intent.setClass(this.activity, NewsDetailActivity.class);
-		// intent.putExtra("username", username);
-		intent.putExtra("id", id);
-		startActivity(intent);
+	/**
+	 * Here the view is a news item to preview a piece of news.
+	 * 
+	 * @view display panel
+	 * @id news id
+	 */
+	protected void readNews(View view, String id) {
+//		Intent intent = new Intent();
+//		intent.setClass(this.activity, NewsDetailActivity.class);
+//		// intent.putExtra("username", username);
+//		intent.putExtra("id", id);
+//		startActivity(intent);
+		
+		/* prepare the gallery */
+		/* show the text */
+		TextView previewText = (TextView) view.findViewById(R.id.newsPreviewText);
+		previewText.setText(preview(id));
 
+	}
+	
+	/**
+	 * get a preview string with a target id of news
+	 */
+	private String preview(String id) {
+		String url = HttpValue.Server+"?m=Index&a=getPreview&newsid="+id;
+		
+		try{
+			HttpResponseProcess process = new HttpResponseProcess(url);
+			return process.toString();
+//			JSONObject jsonObj = new JSONObject(res);
+//			return jsonObj.getString("LEFT(content,20)");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return "";
+		
 	}
 
 	// @Override
@@ -171,15 +214,15 @@ public class NewsFragment extends Fragment implements OnScrollListener {
 	public void onScroll(AbsListView view, int firstVisibleItem,
 		int visibleItemCount, int totalItemCount) {
 		int lastItemId = list.getLastVisiblePosition();	/* get the last visible one */
-		if ((lastItemId + 1) == totalItemCount) {	/* if it reaches bottom */
-			startId = lastItemId;
+		if (!hasLoad && (lastItemId + 1) == totalItemCount) {	/* if it reaches bottom */
+			hasLoad = true;
+			startId = totalItemCount;
 			new Thread() {
 				public void run() {
 					loadMoreData(false);
 				}
 			}.start();
 		}
-
 	}
 
 	@Override

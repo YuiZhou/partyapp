@@ -38,26 +38,5 @@
         android:layout_below="@id/newsTitleView"
         android:textColor="#AAA6A6"
         android:textSize="12sp" />
-    
-    <LinearLayout android:id="@+id/newsPreview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/newsDateView"
-        android:layout_below="@id/newsDateView"
-        android:orientation="vertical"
-        android:visibility="gone">
-        
-		<Gallery 
-		    android:id="@+id/newsGallery"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"/>
-		
-		<TextView android:id="@+id/newsPreviewText"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:textColor="#AAA6A6"
-        	android:textSize="12sp"/>
-        
-    </LinearLayout>
 
 </RelativeLayout>

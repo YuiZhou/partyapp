@@ -49,7 +49,7 @@ public class LeaderFragment extends Fragment implements OnItemClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View layout = inflater
-				.inflate(R.layout.news_fragment, container, false);
+				.inflate(R.layout.leader_fragment, container, false);
 		
 		list = (ListView)layout.findViewById(R.id.list);
 		ArrayList<Map<String, Object>> arrList = new ArrayList<Map<String,Object>>();
@@ -74,7 +74,7 @@ public class LeaderFragment extends Fragment implements OnItemClickListener{
 		
 		SimpleAdapter adapter = new SimpleAdapter(this.activity,  
                 arrList, 
-                R.layout.news_title, 
+                R.layout.leader_title, 
                 new String[] {"title", "hint"},   
                 new int[] {R.id.newsTitleView,R.id.newsDateView});
 		this.list.setAdapter(adapter); 
