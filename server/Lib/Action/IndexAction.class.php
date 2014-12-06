@@ -41,13 +41,25 @@ class IndexAction extends Action {
 	 */
 	public function getNews($newsid){
 		$model = M("news");
-		$newsArray = $model -> field('title, date, content') -> where('id = '.$newsid) -> select();
+		$newsArray = $model -> field('title, date, content') -> where('id = '.$newsid) -> find();
 		
 		try{
-			$this -> ajaxReturn($newsArray[0], "json");
+			$this -> ajaxReturn($newsArray, "json");
 		}catch(Exception $e){
 			return NULL;
 		}
+	}
+
+
+	/**
+	 * Get a preview for a target news according to the id. And the preview length is 20
+	 */
+	public function getPreview($newsid){
+		$model = M("news");
+		$newsArray = $model -> field('LEFT(content, 20)') -> where('id = '.$newsid) -> find();
+		
+		echo $newsArray['LEFT(content,20)'];
+		return $newsArray['LEFT(content,20)'];
 	}
 
 
