@@ -7,7 +7,8 @@
     android:paddingBottom="15dp"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
-    android:paddingTop="8dp" >
+    android:paddingTop="8dp"
+    android:descendantFocusability="blocksDescendants" >
 
     <ImageView
         android:id="@+id/item_circle"
@@ -47,10 +48,18 @@
         android:orientation="vertical"
         android:visibility="gone">
         
-		<Gallery 
-		    android:id="@+id/newsGallery"
+		<HorizontalScrollView 
 		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"/>
+		    android:layout_height="wrap_content"
+		    android:scrollbars="none">
+		    <LinearLayout 
+		        android:id="@+id/newsGallery"
+		        android:orientation="horizontal"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content">
+		        
+		    </LinearLayout>
+		</HorizontalScrollView>
 		
 		<TextView android:id="@+id/newsPreviewText"
 		    android:layout_width="match_parent"
