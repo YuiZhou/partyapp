@@ -26,5 +26,6 @@
     <string name="leader">管理</string>
     <string name="submit">确认发送</string>
     <string name="chat_input">输入140字……</string>
+    <string name="view_news">查看全文</string>
 
 </resources>

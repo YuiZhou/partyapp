@@ -1023,14 +1023,14 @@ containing a value of this type.
         public static final int chat_tag=0x7f050044;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
-        public static final int comment_content=0x7f050056;
-        public static final int comment_input=0x7f050051;
-        public static final int comment_list=0x7f050053;
-        public static final int comment_userid=0x7f050054;
-        public static final int comment_username=0x7f050055;
+        public static final int comment_content=0x7f050058;
+        public static final int comment_input=0x7f050053;
+        public static final int comment_list=0x7f050055;
+        public static final int comment_userid=0x7f050056;
+        public static final int comment_username=0x7f050057;
         public static final int container=0x7f050042;
         public static final int default_activity_button=0x7f050028;
-        public static final int detail_info=0x7f050060;
+        public static final int detail_info=0x7f050061;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
@@ -1043,19 +1043,19 @@ containing a value of this type.
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int index_logo=0x7f050058;
-        public static final int item_circle=0x7f050059;
+        public static final int index_logo=0x7f050052;
+        public static final int item_circle=0x7f05004e;
         public static final int leader_tag=0x7f050046;
-        public static final int list=0x7f050057;
+        public static final int list=0x7f050059;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
-        public static final int list_stu_id=0x7f050067;
-        public static final int list_stu_name=0x7f050068;
+        public static final int list_stu_id=0x7f050068;
+        public static final int list_stu_name=0x7f050069;
         public static final int login=0x7f05004c;
         public static final int login_button_field=0x7f05004b;
         public static final int login_password_field=0x7f050048;
         public static final int login_username_field=0x7f050047;
-        public static final int logout=0x7f050066;
+        public static final int logout=0x7f050067;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
         public static final int newsDateView=0x7f05005b;
@@ -1063,23 +1063,23 @@ containing a value of this type.
         public static final int newsPreview=0x7f05005c;
         public static final int newsPreviewText=0x7f05005e;
         public static final int newsTitleView=0x7f05005a;
-        public static final int news_detail_content=0x7f050050;
-        public static final int news_detail_date=0x7f05004f;
-        public static final int news_detail_title=0x7f05004e;
+        public static final int news_detail_content=0x7f050051;
+        public static final int news_detail_date=0x7f050050;
+        public static final int news_detail_title=0x7f05004f;
         public static final int news_tag=0x7f050043;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
         public static final int password=0x7f05004a;
-        public static final int profile_invoke_date=0x7f050061;
-        public static final int profile_level=0x7f050063;
-        public static final int profile_name=0x7f05005f;
-        public static final int profile_party=0x7f050064;
-        public static final int profile_stu_id=0x7f050065;
-        public static final int profile_submit_date=0x7f050062;
+        public static final int profile_invoke_date=0x7f050062;
+        public static final int profile_level=0x7f050064;
+        public static final int profile_name=0x7f050060;
+        public static final int profile_party=0x7f050065;
+        public static final int profile_stu_id=0x7f050066;
+        public static final int profile_submit_date=0x7f050063;
         public static final int profile_tag=0x7f050045;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
-        public static final int quit=0x7f050069;
+        public static final int quit=0x7f05006a;
         public static final int radio=0x7f05002f;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
@@ -1097,13 +1097,14 @@ containing a value of this type.
         public static final int showTitle=0x7f050006;
         public static final int split_action_bar=0x7f05001e;
         public static final int submit_area=0x7f050039;
-        public static final int submit_comment=0x7f050052;
+        public static final int submit_comment=0x7f050054;
         public static final int tabMode=0x7f050002;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
         public static final int username=0x7f050049;
+        public static final int viewNews=0x7f05005f;
         public static final int withText=0x7f05000c;
     }
     public static final class integer {
@@ -1242,6 +1243,7 @@ containing a value of this type.
         public static final int submit=0x7f0a0024;
         public static final int user_list=0x7f0a001b;
         public static final int username=0x7f0a0012;
+        public static final int view_news=0x7f0a0026;
     }
     public static final class style {
         /** 

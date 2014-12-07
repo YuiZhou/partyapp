@@ -6,13 +6,14 @@ import com.example.partyapp.R;
 import com.fdparty.common.HttpResponseProcess;
 import com.fdparty.common.HttpValue;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
-public class NewsDetailActivity extends ActionBarActivity {
+public class NewsDetailActivity extends Activity {
 	private String id;
 	
 	protected void onCreate(Bundle savedInstanceState) {

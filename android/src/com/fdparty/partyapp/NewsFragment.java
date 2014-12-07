@@ -32,6 +32,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView;
@@ -47,8 +48,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 @SuppressLint({ "NewApi", "ValidFragment" })
-public class NewsFragment extends Fragment implements OnScrollListener {
+public class NewsFragment extends Fragment implements OnScrollListener,
+		OnClickListener, OnItemClickListener {
 
+	private static String newsIndex = "";
 	private View expandedView = null;
 	private int startId = 0;
 	private String username;
@@ -78,35 +81,7 @@ public class NewsFragment extends Fragment implements OnScrollListener {
 
 		loadData();
 		/* set the OnItemClickListener */
-		this.list.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int index, long id) {
-
-				for (int i = 0; i < parent.getChildCount(); i++) {
-					Log.v("child", index + " " + i + " "
-							+ parent.getChildAt(i).toString());
-				}
-				/* hide the old expanded one and the new one visible */
-				if (expandedView != null) {
-					expandedView.findViewById(R.id.newsPreview).setVisibility(
-							View.GONE);
-				}
-				if (view != expandedView) {
-					TextView tv = (TextView) view
-							.findViewById(R.id.newsTitleView);
-					view.findViewById(R.id.newsPreview).setVisibility(
-							View.VISIBLE);
-					expandedView = view;
-				} else {
-					expandedView = null;
-				}
-				Map<String, Object> item = arrList.get(index);
-				String newsId = (String) item.get("id");
-				readNews(view, newsId);
-			}
-		});
+		this.list.setOnItemClickListener(this);
 		SimpleAdapter adapter = new SimpleAdapter(activity, arrList,
 				R.layout.news_title, new String[] { "title", "date" },
 				new int[] { R.id.newsTitleView, R.id.newsDateView });
@@ -171,25 +146,25 @@ public class NewsFragment extends Fragment implements OnScrollListener {
 	 * @id news id
 	 */
 	protected void readNews(View view, String id) {
-		// Intent intent = new Intent();
-		// intent.setClass(this.activity, NewsDetailActivity.class);
-		// // intent.putExtra("username", username);
-		// intent.putExtra("id", id);
-		// startActivity(intent);
-
+		newsIndex = id;
 		/*****************************
 		 * prepare the gallery
 		 *****************************/
 		final LinearLayout gallery = (LinearLayout) view
 				.findViewById(R.id.newsGallery);
+		if (gallery.getChildCount() != 0) {
+			return;
+		}
+
 		// TODO find the path of images
-		String[] paths = { "http://www.baidu.com/img/bdlogo.png",
+		String[] paths = {
+				"http://www.baidu.com/img/bdlogo.png",
 				"http://img3.douban.com/view/photo/photo/public/p2164446560.jpg",
 				"http://img5.douban.com/view/photo/thumb/public/p2164446566.jpg",
-				"http://img3.douban.com/view/photo/thumb/public/p2164446574.jpg"
-		};
+				"http://img3.douban.com/view/photo/thumb/public/p2164446574.jpg" };
+
 		for (final String path : paths) {
-			new Thread(){
+			new Thread() {
 				public void run() {
 					Downloader d = new Downloader();
 					String filepath = d.download(path);
@@ -311,14 +286,10 @@ public class NewsFragment extends Fragment implements OnScrollListener {
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		int lastItemId = list.getLastVisiblePosition(); /*
-														 * get the last visible
-														 * one
-														 */
-		if (!hasLoad && (lastItemId + 1) == totalItemCount) { /*
-															 * if it reaches
-															 * bottom
-															 */
+		/* get the last visible one */
+		int lastItemId = list.getLastVisiblePosition();
+		/* if it reaches bottom */
+		if (!hasLoad && (lastItemId + 1) == totalItemCount) {
 			hasLoad = true;
 			startId = totalItemCount;
 			new Thread() {
@@ -331,6 +302,45 @@ public class NewsFragment extends Fragment implements OnScrollListener {
 
 	@Override
 	public void onScrollStateChanged(AbsListView arg0, int arg1) {
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.viewNews:
+			Intent intent = new Intent();
+			intent.setClass(this.activity, NewsDetailActivity.class);
+			// intent.putExtra("username", username);
+			intent.putExtra("id", newsIndex);
+			startActivity(intent);
+			break;
+		}
+
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int index, long id) {
+		for (int i = 0; i < parent.getChildCount(); i++) {
+			Log.v("child", index + " " + i + " "
+					+ parent.getChildAt(i).toString());
+		}
+		/* hide the old expanded one and the new one visible */
+		if (expandedView != null) {
+			expandedView.findViewById(R.id.newsPreview)
+					.setVisibility(View.GONE);
+		}
+		if (view != expandedView) {
+			TextView tv = (TextView) view.findViewById(R.id.newsTitleView);
+			view.findViewById(R.id.newsPreview).setVisibility(View.VISIBLE);
+			expandedView = view;
+			Map<String, Object> item = arrList.get(index);
+			String newsId = (String) item.get("id");
+			readNews(view, newsId);
+			TextView viewNews = (TextView) view.findViewById(R.id.viewNews);
+			viewNews.setOnClickListener(this);
+		} else {
+			expandedView = null;
+		}
 	}
 }
 

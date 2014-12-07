@@ -66,6 +66,16 @@
 		    android:layout_height="wrap_content"
 		    android:textColor="#AAA6A6"
         	android:textSize="12sp"/>
+		
+		<TextView android:id="@+id/viewNews"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:textSize="14sp"
+		    android:textColor="#200000"
+		    android:text="@string/view_news"
+		    android:layout_gravity="right"
+		    android:focusable="false"
+		    />"
         
     </LinearLayout>
 

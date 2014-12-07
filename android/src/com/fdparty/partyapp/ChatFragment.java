@@ -68,7 +68,7 @@ public class ChatFragment extends Fragment implements OnScrollListener {
 
 			@Override
 			public void onClick(View v) {
-				String comment = commentView.getText().toString().trim();
+				final String comment = commentView.getText().toString().trim();
 				if (comment.length() == 0) { /* check the value */
 					Toast.makeText(activity, " ‰»ÎŒƒ±æ", Toast.LENGTH_SHORT).show();
 					return;
@@ -78,7 +78,17 @@ public class ChatFragment extends Fragment implements OnScrollListener {
 					return;
 				}
 
-				pushData(comment);
+				new Thread(){
+					public void run() {
+						Message msg = new Message();
+						msg.what = 2;
+						Bundle data = new Bundle();
+						data.putString("comment", comment);
+						msg.setData(data);
+						handler.sendMessage(msg);
+						//pushData(comment);
+					};
+				}.start();
 				commentView.setText("");
 			}
 		});
@@ -149,8 +159,6 @@ public class ChatFragment extends Fragment implements OnScrollListener {
 				// jsonObj.get("title")+"date: "+jsonObj.get("date"));
 				arrList.add(item);
 			}
-
-			
 			
 			Message msg = new Message();
 			msg.what = 1;
@@ -167,10 +175,13 @@ public class ChatFragment extends Fragment implements OnScrollListener {
 		@Override
 		public void handleMessage(Message msg){
 			switch(msg.what){
-			case 1:
+			case 1:	// add news to the chat fragment
 				SimpleAdapter adapter = (SimpleAdapter) list.getAdapter();
 				adapter.notifyDataSetChanged();
 				break;
+			case 2:
+				Bundle data = msg.getData();
+				pushData(data.getString("comment"));
 			}
 		}
 	};
