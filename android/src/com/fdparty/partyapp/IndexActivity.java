@@ -1,8 +1,12 @@
 package com.fdparty.partyapp;
 
 import com.example.partyapp.R;
+import com.fdparty.chat.ChatFragment;
 import com.fdparty.common.FileValue;
 import com.fdparty.common.User;
+import com.fdparty.leader.LeaderFragment;
+import com.fdparty.news.NewsFragment;
+import com.fdparty.profile.ProfileFragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

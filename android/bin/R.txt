@@ -240,8 +240,9 @@ int drawable login_bt 0x7f02005d
 int drawable login_input 0x7f02005e
 int drawable logo 0x7f02005f
 int drawable logout_bg 0x7f020060
-int drawable welcome_background 0x7f020061
-int drawable welcome_copyright 0x7f020062
+int drawable user_list_bg 0x7f020061
+int drawable welcome_background 0x7f020062
+int drawable welcome_copyright 0x7f020063
 int id action_bar 0x7f05001c
 int id action_bar_activity_content 0x7f050015
 int id action_bar_container 0x7f05001b

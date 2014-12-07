@@ -995,8 +995,9 @@ containing a value of this type.
         public static final int login_input=0x7f02005e;
         public static final int logo=0x7f02005f;
         public static final int logout_bg=0x7f020060;
-        public static final int welcome_background=0x7f020061;
-        public static final int welcome_copyright=0x7f020062;
+        public static final int user_list_bg=0x7f020061;
+        public static final int welcome_background=0x7f020062;
+        public static final int welcome_copyright=0x7f020063;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
