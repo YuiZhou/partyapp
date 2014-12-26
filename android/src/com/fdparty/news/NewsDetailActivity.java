@@ -2,16 +2,15 @@ package com.fdparty.news;
 
 import org.json.JSONObject;
 
-import com.example.partyapp.R;
-import com.fdparty.common.HttpResponseProcess;
-import com.fdparty.common.HttpValue;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.widget.TextView;
+
+import com.example.partyapp.R;
+import com.fdparty.common.HttpResponseProcess;
+import com.fdparty.common.HttpValue;
 
 public class NewsDetailActivity extends Activity {
 	private String id;
