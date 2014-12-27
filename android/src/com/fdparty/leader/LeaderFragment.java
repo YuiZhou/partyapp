@@ -9,14 +9,17 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -29,7 +32,7 @@ import com.example.partyapp.R;
  */
 
 @SuppressLint({ "ValidFragment", "NewApi" }) 
-public class LeaderFragment extends Fragment implements OnItemClickListener{
+public class LeaderFragment extends Fragment implements OnClickListener{
 	/*
 	 * I reuse the news fragment's layout file.
 	 * For there are three chooses for the leader, so I maintain a array with length 3.
@@ -38,12 +41,13 @@ public class LeaderFragment extends Fragment implements OnItemClickListener{
 	 */
 	private Activity activity;
 	private String username;
-	private ListView list;
+	
+	private View leaderList, leaderNews, leaderUser,
+	listFrag, newsFrag, userFrag;
 	
 	public LeaderFragment(Activity activity, String username) {
 		this.activity = activity;
 		this.username = username;
-
 	}
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,85 +55,50 @@ public class LeaderFragment extends Fragment implements OnItemClickListener{
 		View layout = inflater
 				.inflate(R.layout.leader_fragment, container, false);
 		
-		list = (ListView)layout.findViewById(R.id.list);
-		ArrayList<Map<String, Object>> arrList = new ArrayList<Map<String,Object>>();
-		String[][] titles = {
-				{"党支部名单","查看你管理的党支部成员名单"},
-				{"发布新闻","你所在的党支部的成员将收到你的通知"},
-				{"添加新成员","添加积极向党组织靠拢的成员"}
-		};
+		leaderList = layout.findViewById(R.id.leader_list);
+		leaderList.setOnClickListener(this);
+		leaderNews = layout.findViewById(R.id.leader_news);
+		leaderNews.setOnClickListener(this);
+		leaderUser = layout.findViewById(R.id.leader_user);
+		leaderUser.setOnClickListener(this);
 		
-		for(int i = 0; i < titles.length; i++){
-			Map<String,Object> item = new HashMap<String,Object>();
-			//JSONObject jsonObj = (JSONObject)jsonObjs.opt(i);
-			item.put("title", titles[i][0]);
-			item.put("hint", titles[i][1]);
-//			item.put("title", jsonObj.get("title"));
-//			item.put("date", jsonObj.get("date"));
-//			item.put("id", jsonObj.get("id"));
-//			
-//			//Log.d("Debug","title: "+ jsonObj.get("title")+"date: "+jsonObj.get("date"));
-			arrList.add(item);
-		}
-		
-		SimpleAdapter adapter = new SimpleAdapter(this.activity,  
-                arrList, 
-                R.layout.leader_title, 
-                new String[] {"title", "hint"},   
-                new int[] {R.id.newsTitleView,R.id.newsDateView});
-		this.list.setAdapter(adapter); 
-		this.list.setOnItemClickListener(this);
-		
-//		list_tag = (TextView)layout.findViewById(R.id.leader_user_list);
-//		news_tag = (TextView)layout.findViewById(R.id.leader_add_news);
-//		user_tag = (TextView)layout.findViewById(R.id.leader_add_user);
-//		
-//		list_tag.setOnClickListener(this);
-//		news_tag.setOnClickListener(this);
-//		user_tag.setOnClickListener(this);
+		listFrag = layout.findViewById(R.id.leader_list_frag);
+		newsFrag = layout.findViewById(R.id.leader_news_frag);
+		userFrag = layout.findViewById(R.id.leader_user_frag);
 		
 		return layout;
 	}
 
-//	public void onClick(View v) {
-//		Intent intent = new Intent();
-//		switch(v.getId()){
-//		case R.id.leader_user_list:
-//			intent.setClass(this.activity, UserList.class);
-//			break;
-//		case R.id.leader_add_news:
-//			intent.setClass(this.activity, AddNews.class);
-//			break;
-//		case R.id.leader_add_user:
-//			intent.setClass(this.activity, AddUser.class);
-//			break;
-//		default:
-//			return;
-//		}
-//		intent.putExtra("username", username);
-//		
-//		startActivity(intent);
-//	}
-
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int index, long arg3) {
-		Intent intent = new Intent();
-		switch(index){
-		case 0:
-			intent.setClass(this.activity, UserList.class);
+	public void onClick(View v) {
+		LinearLayout.LayoutParams paramsBase = new LinearLayout.LayoutParams
+				(LayoutParams.MATCH_PARENT, 0);
+		paramsBase.weight = 1.0f;
+		
+		leaderList.setLayoutParams(paramsBase);
+		leaderNews.setLayoutParams(paramsBase);
+		leaderUser.setLayoutParams(paramsBase);
+		View hint  = null;
+		
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
+				(LayoutParams.MATCH_PARENT, 0);
+		params.weight = 5.0f;
+		switch (v.getId()) {
+		case R.id.leader_list:
+			leaderList.setLayoutParams(params);
+			hint = activity.findViewById(R.id.leader_list_hint);
+			listFrag.setVisibility(View.VISIBLE);
 			break;
-		case 1:
-			intent.setClass(this.activity, AddNews.class);
+		case R.id.leader_news:
+			leaderNews.setLayoutParams(params);
+			hint = activity.findViewById(R.id.leader_news_hint);
 			break;
-		case 2:
-			intent.setClass(this.activity, AddUser.class);
-			break;
-		default:
-			return;
+		case R.id.leader_user:
+			leaderUser.setLayoutParams(params);
+			hint = activity.findViewById(R.id.leader_user_hint);
 		}
-		intent.putExtra("username", username);
 		
-		startActivity(intent);
-		
+		hint.setVisibility(View.GONE);
 	}
+
 }
