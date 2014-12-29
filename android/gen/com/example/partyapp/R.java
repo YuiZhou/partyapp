@@ -15,6 +15,7 @@ public final class R {
         public static final int fontColor=0x7f040000;
         public static final int logout_color=0x7f040003;
         public static final int notChoseTag=0x7f040002;
+        public static final int white=0x7f040004;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -57,14 +58,16 @@ public final class R {
         public static final int comment_userid=0x7f09001a;
         public static final int comment_username=0x7f09001b;
         public static final int container=0x7f090006;
-        public static final int detail_info=0x7f090034;
+        public static final int detail_info=0x7f090036;
         public static final int index_logo=0x7f090016;
         public static final int item_circle=0x7f090012;
         public static final int leader_list=0x7f09001d;
         public static final int leader_list_frag=0x7f090021;
         public static final int leader_list_hint=0x7f090020;
         public static final int leader_list_item_circle=0x7f09001e;
+        public static final int leader_list_ls=0x7f09002c;
         public static final int leader_list_title=0x7f09001f;
+        public static final int leader_list_title_view=0x7f09002d;
         public static final int leader_news=0x7f090022;
         public static final int leader_news_frag=0x7f090026;
         public static final int leader_news_hint=0x7f090025;
@@ -76,35 +79,35 @@ public final class R {
         public static final int leader_user_hint=0x7f09002a;
         public static final int leader_user_item_circle=0x7f090028;
         public static final int leader_user_title=0x7f090029;
-        public static final int list=0x7f09002e;
-        public static final int list_stu_id=0x7f09003b;
-        public static final int list_stu_name=0x7f09003c;
+        public static final int list=0x7f090030;
+        public static final int list_stu_id=0x7f09003d;
+        public static final int list_stu_name=0x7f09003e;
         public static final int login=0x7f090010;
         public static final int login_button_field=0x7f09000f;
         public static final int login_password_field=0x7f09000c;
         public static final int login_username_field=0x7f09000b;
-        public static final int logout=0x7f09003a;
-        public static final int newsDateView=0x7f09002d;
-        public static final int newsGallery=0x7f090030;
-        public static final int newsPreview=0x7f09002f;
-        public static final int newsPreviewText=0x7f090031;
-        public static final int newsTitleView=0x7f09002c;
+        public static final int logout=0x7f09003c;
+        public static final int newsDateView=0x7f09002f;
+        public static final int newsGallery=0x7f090032;
+        public static final int newsPreview=0x7f090031;
+        public static final int newsPreviewText=0x7f090033;
+        public static final int newsTitleView=0x7f09002e;
         public static final int news_detail_content=0x7f090015;
         public static final int news_detail_date=0x7f090014;
         public static final int news_detail_title=0x7f090013;
         public static final int news_tag=0x7f090007;
         public static final int password=0x7f09000e;
-        public static final int profile_invoke_date=0x7f090035;
-        public static final int profile_level=0x7f090037;
-        public static final int profile_name=0x7f090033;
-        public static final int profile_party=0x7f090038;
-        public static final int profile_stu_id=0x7f090039;
-        public static final int profile_submit_date=0x7f090036;
+        public static final int profile_invoke_date=0x7f090037;
+        public static final int profile_level=0x7f090039;
+        public static final int profile_name=0x7f090035;
+        public static final int profile_party=0x7f09003a;
+        public static final int profile_stu_id=0x7f09003b;
+        public static final int profile_submit_date=0x7f090038;
         public static final int profile_tag=0x7f090009;
-        public static final int quit=0x7f09003d;
+        public static final int quit=0x7f09003f;
         public static final int submit_comment=0x7f090018;
         public static final int username=0x7f09000d;
-        public static final int viewNews=0x7f090032;
+        public static final int viewNews=0x7f090034;
     }
     public static final class layout {
         public static final int activity_add_news=0x7f030000;
@@ -116,12 +119,14 @@ public final class R {
         public static final int chat_fragment=0x7f030006;
         public static final int comment=0x7f030007;
         public static final int leader_fragment=0x7f030008;
-        public static final int leader_title=0x7f030009;
-        public static final int list_fragment=0x7f03000a;
-        public static final int news_fragment=0x7f03000b;
-        public static final int news_title=0x7f03000c;
-        public static final int profile_fragment=0x7f03000d;
-        public static final int user_list=0x7f03000e;
+        public static final int leader_list=0x7f030009;
+        public static final int leader_list_title=0x7f03000a;
+        public static final int leader_title=0x7f03000b;
+        public static final int list_fragment=0x7f03000c;
+        public static final int news_fragment=0x7f03000d;
+        public static final int news_title=0x7f03000e;
+        public static final int profile_fragment=0x7f03000f;
+        public static final int user_list=0x7f030010;
     }
     public static final class menu {
         public static final int index=0x7f080000;
@@ -188,6 +193,8 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
+ All customizations that are NOT specific to a particular API-level can go here. 
+ All customizations that are NOT specific to a particular API-level can go here. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;

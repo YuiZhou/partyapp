@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.opengl.Visibility;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.example.partyapp.R;
+import com.fdparty.news.NewsFragment;
 
 /**
  * This class implements the management for a leader.
@@ -44,6 +47,8 @@ public class LeaderFragment extends Fragment implements OnClickListener{
 	
 	private View leaderList, leaderNews, leaderUser,
 	listFrag, newsFrag, userFrag;
+	
+	private Fragment list, news, user;
 	
 	public LeaderFragment(Activity activity, String username) {
 		this.activity = activity;
@@ -83,11 +88,21 @@ public class LeaderFragment extends Fragment implements OnClickListener{
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
 				(LayoutParams.MATCH_PARENT, 0);
 		params.weight = 5.0f;
+		
+		// prepare the fragment manager
+		FragmentManager fgm = activity.getFragmentManager();
+		FragmentTransaction transaction = fgm.beginTransaction();
+		
 		switch (v.getId()) {
 		case R.id.leader_list:
 			leaderList.setLayoutParams(params);
 			hint = activity.findViewById(R.id.leader_list_hint);
 			listFrag.setVisibility(View.VISIBLE);
+			if(list == null){
+				list = new ListFragment(activity, username);
+				transaction.add(R.id.leader_list_frag, list);
+			}
+			transaction.show(list);
 			break;
 		case R.id.leader_news:
 			leaderNews.setLayoutParams(params);
@@ -98,6 +113,7 @@ public class LeaderFragment extends Fragment implements OnClickListener{
 			hint = activity.findViewById(R.id.leader_user_hint);
 		}
 		
+		transaction.commit();
 		hint.setVisibility(View.GONE);
 	}
 

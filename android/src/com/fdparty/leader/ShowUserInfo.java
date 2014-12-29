@@ -18,7 +18,6 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +26,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
+public class ShowUserInfo extends Activity implements OnClickListener {
 	private String username;
 	private String owner;
 
@@ -64,6 +63,9 @@ public class ShowUserInfo extends ActionBarActivity implements OnClickListener {
 		this.invokeView.setOnClickListener(this);
 		this.nameView.setOnClickListener(this);
 		this.partyView.setOnClickListener(this);
+		
+		View quitBtView = findViewById(R.id.logout);
+		quitBtView.setVisibility(View.GONE);
 
 		loadInfo();
 

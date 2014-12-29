@@ -53,11 +53,12 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.com.fdparty.leader.AddUser"
+            android:name="com.fdparty.leader.AddUser"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="cocom.fdparty.leader.ShowUserInfo"
+            android:name="com.fdparty.leader.ShowUserInfo"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
             android:screenOrientation="portrait" >
         </activity>
     </application>

@@ -4,4 +4,5 @@
     <color name="choseTag">#3D0304</color>
     <color name="notChoseTag">#D0CECE</color>
     <color name="logout_color">#65151c</color>
+    <color name="white">#FDFDFD</color>
 </resources>
