@@ -5,4 +5,5 @@
     <color name="notChoseTag">#D0CECE</color>
     <color name="logout_color">#65151c</color>
     <color name="white">#FDFDFD</color>
+    <color name="previewFont">#AAA6A6</color>
 </resources>

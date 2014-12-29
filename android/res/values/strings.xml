@@ -33,5 +33,7 @@
     <string name="leader_news_hint">你所在的党支部的成员将收到你的通知</string>
     <string name="leader_user_title">添加新成员</string>
     <string name="leader_user_hint">添加积极向党组织靠拢的成员</string>
-
+    <string name="add_news_text">您拥有发布新闻的权限，点击发布新闻\n\n注意：编辑发送成功之后我们的服务器会对您发布的内容进行检测，如有违规内容，您所发布的新闻将不会出现在新闻栏目中，敬请配合理解！</string>
+	<string name="add_news_button">点击发布新闻内容</string>
+    
 </resources>

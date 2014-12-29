@@ -107,6 +107,12 @@ public class LeaderFragment extends Fragment implements OnClickListener{
 		case R.id.leader_news:
 			leaderNews.setLayoutParams(params);
 			hint = activity.findViewById(R.id.leader_news_hint);
+			newsFrag.setVisibility(View.VISIBLE);
+			if(news == null){
+				news = new AddNewsFragment(activity, username);
+				transaction.add(R.id.leader_news_frag, news);
+			}
+			transaction.show(news);
 			break;
 		case R.id.leader_user:
 			leaderUser.setLayoutParams(params);
